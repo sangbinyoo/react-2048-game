@@ -5,14 +5,51 @@
   .row-tile{
     display: flex;
     justify-content:center;
-    .col-tile{
-      width: 100px;
-      height: 100px;
-      margin: 1px;
-      border: 1px solid #000;
-      border-radius: 4px;
-      display: flex;
-    }
   }
 
+  .tile{
+    font-size :36px;
+    font-weight: bold;
+    width: 100px;
+    height: 100px;
+    margin: 1px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .tile-2{
+    background-color: rgb(225, 235, 190);
+  }
+  .tile-4{
+    background-color: rgb(235, 219, 190);
+  }
+  .tile-8{
+    background-color: rgb(196, 235, 190);
+  }
+  .tile-16{
+    background-color: rgb(190, 222, 235);
+  }
+  .tile-32{
+    background-color: rgb(190, 206, 235);
+  }
+  .tile-64{
+    background-color: rgb(199, 156, 232);
+  }
+  .tile-128{
+    background-color: rgb(227, 131, 184);
+  }
+  .tile-256{
+    background-color: rgb(204, 41, 123);
+  }
+  .tile-512{
+    background-color: rgb(32, 130, 35);
+  }
+  .tile-1024{
+    background-color: rgb(229, 85, 19);
+  }
+  .tile-2048{
+    background-color: rgb(36, 172, 110);
+  }
 }

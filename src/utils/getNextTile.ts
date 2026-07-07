@@ -4,10 +4,18 @@ export interface Tile{
     value:number;
 }
 
-export function getNextTile():Tile{
-    const randomX = Math.round(Math.random()*10) % 4;
-    const randomY = Math.round(Math.random()*10) % 4;
+export function getNextTile(board: number[][]):Tile{
+    const emptyPositions: Tile[] = [];
+    board.forEach((yrow, y)=>{
+        yrow.forEach((value,x)=>{
+            if(value == 0){
+                emptyPositions.push({x:x,y:y, value:value});
+            }
+        }
+    )})
+
+    const randomIndex = Math.round(Math.random()*10) % emptyPositions.length;
     const nextValue = Math.round(Math.random()*10) % 2 ? 4:2;
 
-    return {x:randomX, y:randomY, value:nextValue}
+    return {x:emptyPositions[randomIndex].x, y:emptyPositions[randomIndex].y, value:nextValue}
 }
