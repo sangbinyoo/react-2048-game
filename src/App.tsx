@@ -7,7 +7,7 @@ import { getNextTile, Tile } from './utils/getNextTile';
 function App() {
   
   const [gameBoard, setGameBoard] = useState([] as number[][]);
-
+  const [score, setScore] = useState(0);
   //방향키 입력 이벤트를 바인딩
   useEffect(()=>{
     window.addEventListener('keydown', keyboardListener as any);
@@ -15,7 +15,7 @@ function App() {
     return ()=>{
       window.removeEventListener('keydown', keyboardListener as any);
     }
-  },[gameBoard])
+  },[gameBoard, score])
 
 
   // 방향키 이벤트를 감지하는 로직
@@ -37,11 +37,12 @@ function App() {
   const gameStart = () => {
     // if(!!gameBoard && gameBoard.size > 0) return;
     let board = getBoard();
+    setScore(0);
     addNextTile(board)
   }
 
   //TODO : 방향키에 따라 게임보드의 타일을 이동시키고 합치는 로직
-  const moveAndMerge = (direction:string) => {
+  const moveAndMerge = (inputKey:string) => {
 
     const newBoard:number[][] = new Array(...gameBoard);
 
@@ -57,7 +58,7 @@ function App() {
     이동종료후엔 합병된위치의 다음인덱스부터 시작한다
     */
 
-    switch(direction){
+    switch(inputKey){
       //x가 고정
       case 'ArrowUp':
         for(let x=0; x<4; x++){
@@ -68,6 +69,7 @@ function App() {
               if(currentValue == newBoard[count-1][x]){
                 newBoard[count-1][x] *= 2;
                 newBoard[count][x] = 0;
+                setScore(newBoard[count-1][x] + score);
                 count--;
               }else if(newBoard[count-1][x] == 0){
                 newBoard[count-1][x] = currentValue;
@@ -89,6 +91,7 @@ function App() {
               if(currentValue == newBoard[count+1][x]){
                 newBoard[count+1][x] *= 2;
                 newBoard[count][x] = 0;
+                setScore(newBoard[count+1][x] + score);
                 count++;
               }else if(newBoard[count+1][x] == 0){
                 newBoard[count+1][x] = currentValue;
@@ -111,6 +114,7 @@ function App() {
               if(currentValue == newBoard[y][count-1]){
                 newBoard[y][count-1] *= 2;
                 newBoard[y][count] = 0;
+                setScore(newBoard[y][count-1] + score);
                 count--;
               }else if(newBoard[y][count-1] == 0){
                 newBoard[y][count-1] = currentValue;
@@ -132,6 +136,7 @@ function App() {
               if(currentValue == newBoard[y][count+1]){
                 newBoard[y][count+1] *= 2;
                 newBoard[y][count] = 0;
+                setScore(newBoard[y][count+1] + score);
                 count++;
               }else if(newBoard[y][count+1] == 0){
                 newBoard[y][count+1] = currentValue;
@@ -175,6 +180,7 @@ function App() {
       <header>
         <div>Play 2048</div>
         <button onClick={gameStart}>Game Start</button>
+        <div>Score : {score}</div>
       </header>
       <section className="game-board">
         {gameBoard.map((_,y)=> 
