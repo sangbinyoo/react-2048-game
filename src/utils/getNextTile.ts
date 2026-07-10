@@ -4,7 +4,7 @@ export interface Tile{
     value:number;
 }
 
-export function getNextTile(board: number[][]):Tile{
+export function getNextTile(board: number[][]):Tile|null{
     const emptyPositions: Tile[] = [];
     board.forEach((yrow, y)=>{
         yrow.forEach((value,x)=>{
@@ -13,7 +13,9 @@ export function getNextTile(board: number[][]):Tile{
             }
         }
     )})
-
+    if(emptyPositions.length == 0){
+        return null;
+    }
     const randomIndex = Math.round(Math.random()*10) % emptyPositions.length;
     const nextValue = Math.round(Math.random()*10) % 2 ? 4:2;
 
