@@ -1,55 +1,90 @@
-.game-board{
-  width: 100%;
+.game-board {
+  width: 408px;
   height: auto;
-
-  .row-tile{
-    display: flex;
-    justify-content:center;
-  }
-
-  .tile{
-    font-size :36px;
-    font-weight: bold;
-    width: 100px;
-    height: 100px;
-    margin: 1px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .tile-2{
-    background-color: rgb(225, 235, 190);
-  }
-  .tile-4{
-    background-color: rgb(235, 219, 190);
-  }
-  .tile-8{
-    background-color: rgb(196, 235, 190);
-  }
-  .tile-16{
-    background-color: rgb(190, 222, 235);
-  }
-  .tile-32{
-    background-color: rgb(190, 206, 235);
-  }
-  .tile-64{
-    background-color: rgb(199, 156, 232);
-  }
-  .tile-128{
-    background-color: rgb(227, 131, 184);
-  }
-  .tile-256{
-    background-color: rgb(204, 41, 123);
-  }
-  .tile-512{
-    background-color: rgb(32, 130, 35);
-  }
-  .tile-1024{
-    background-color: rgb(229, 85, 19);
-  }
-  .tile-2048{
-    background-color: rgb(36, 172, 110);
-  }
 }
+main{
+  width: fit-content;
+  margin: 40px auto;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-right{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: #6a4ab8;
+  letter-spacing: -0.5px;
+}
+.score-box {
+  font-size: 15px;
+  font-weight: 500;
+  color: #3a8a9e;
+  background-color: #c8eef4;
+  border: 2px solid #90d4e4;
+  border-radius: 8px;
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+.row-tile {
+  display: flex;
+  justify-content: center;
+}
+
+.tile {
+  font-size: 36px;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  margin: 1px;
+  border: 2px solid transparent; /* 빈 타일도 2px로 통일, 색만 투명 */
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box; /* 보더가 크기에 포함되도록 */
+}
+
+.tile-empty {
+  background-color: #f0eafa;
+  border: 2px solid #e0d4f4;
+}
+
+.tile-2    { background-color: #fde8e8; color: #c0737a; border: 2px solid #f5c4c4; }
+.tile-4    { background-color: #fde8d4; color: #bf7a52; border: 2px solid #f5ccaa; }
+.tile-8    { background-color: #fdf2c4; color: #b89328; border: 2px solid #f0dc90; }
+.tile-16   { background-color: #d4f2d4; color: #4a9a5a; border: 2px solid #a4dca4; }
+.tile-32   { background-color: #c8eef4; color: #3a8a9e; border: 2px solid #90d4e4; }
+.tile-64   { background-color: #ccd8f8; color: #3a5abe; border: 2px solid #9ab0f0; }
+.tile-128  { background-color: #dccef8; color: #6a4ab8; border: 2px solid #b8a0ee; }
+.tile-256  { background-color: #f2cef4; color: #9a3aaa; border: 2px solid #dea0e4; }
+.tile-512  { background-color: #f8cce4; color: #b83a7a; border: 2px solid #eca0c8; }
+.tile-1024 { background-color: #f8d4cc; color: #b84a3a; border: 2px solid #ecaaa0; }
+.tile-2048 { background-color: #c8f4e8; color: #2a8a6a; border: 2px solid #90e0c4; }
+
+.btn-new-game {
+  background-color: #c8f4e8;
+  color: #2a8a6a;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  letter-spacing: 0.3px;
+}
+
+.btn-new-game:hover { background-color: #a8ecd6; }
+.btn-new-game:active { transform: scale(0.97); }

@@ -41,15 +41,19 @@ function App() {
     <>
     <main>
       <header>
-        <div>Play 2048</div>
-        <button onClick={gameStart}>{gameState.isGameOver ? 'Game Restart' : 'Game Start'}</button>
-        <div>Score : {gameState.score}</div>
+        <div className='game-title'>Play 2048</div>
+        <div className='header-right'>
+          <div className='score-box'>
+            Score : {gameState.score}
+          </div>
+          <button className="btn-new-game" onClick={gameStart}>{gameState.isGameOver ? 'Restart' : 'Start'}</button>
+        </div>
       </header>
       <section className="game-board">
         {gameState.gameBoard.map((_,y)=> 
           <div key={y} className="row-tile">
             {_.map((__,x)=>
-              <div className={`tile tile-${__}`} key={x}>
+              <div className={`tile ${__ === 0 ? 'tile-empty' : `tile-${__}`}`} key={x}>
                   {__ !== 0 ? __ : ''}
               </div>
             )}
