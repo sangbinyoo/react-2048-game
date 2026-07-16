@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useReducer, useState } from 'react'
 import './App.css';
 import { getNextTile, Tile } from './utils/getNextTile';
 
-const initialState:GameState = { gameBoard:[], score:0, key:'', isGameOver:false}
+const initialState:GameState = { gameBoard:[], score:0, key:'', isGameOver:false, isWin:false}
 
 function App() {
   
@@ -23,9 +23,10 @@ function App() {
     const allowedKeys = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
     e.preventDefault();
     if (!allowedKeys.includes(e.key)) return;
-
-    setGameState({type: 'MOVE_TILE', key:e.key});
-    if(gameState.isGameOver){
+    if(!gameState.isGameOver || !gameState.isWin){
+      setGameState({type: 'MOVE_TILE', key:e.key});
+    }
+    if(gameState.isGameOver || gameState.isWin){
       window.removeEventListener('keydown', keyboardListener as any);
 
     }
@@ -57,7 +58,7 @@ function App() {
         {
           gameState.isGameOver &&(
           <div>
-            Game Over !            
+            {gameState.isWin ? 'You win !' : 'Game Over !' }
           </div>)
         }
         <div></div>
@@ -84,7 +85,7 @@ export function manageGame(state:GameState, action:{type:string, key:string}):Ga
   let board:number[][] = [];
   let score:number = 0;
   let isGameOver:boolean = false;
-
+  let isWin:boolean = false;
   switch(action.type){
     case 'START':
       board = getBoard();
@@ -201,11 +202,14 @@ export function manageGame(state:GameState, action:{type:string, key:string}):Ga
 
       //GameOver체크 
       isGameOver = checkGameOver(board);
-
+      if(isWinGame(board)){
+        isGameOver = true;
+        isWin = true;
+      }
       break;
   }
 
-  return {gameBoard: board, score: score, key: action.key, isGameOver:isGameOver}
+  return {gameBoard: board, score: score, key: action.key, isGameOver:isGameOver, isWin:isWin}
 }
 function checkGameOver(board:number[][]){
   let isGameOver:boolean = true;
@@ -225,9 +229,13 @@ function checkGameOver(board:number[][]){
   })
   return isGameOver;
 }
+function isWinGame(board:number[][]){
+  return board.some(_=> _.some(v=> v== 2048))
+}
 interface GameState {
   gameBoard:number[][]
   score:number
   key:string
   isGameOver:boolean
+  isWin:boolean
 }
