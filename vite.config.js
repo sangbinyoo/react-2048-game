@@ -6,4 +6,3 @@ export default defineConfig({
   plugins: [react()],
   base:'/react-2048-game/'
 })
-//TEST COMMIT
